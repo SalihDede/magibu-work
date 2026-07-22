@@ -28,3 +28,10 @@ Modelin bazı davranışları
 -----------
 
 ![alt text](Ders2/images/image3.png)
+
+## Ders3 : Ödevlendirmeler Ders3 altında mevcuttur
+- Finetune edilmiş model : SalihHub/trendyol-marangoz-finetuned-gemma-4-E4B-it
+
+- Openrouther üzerinden seçilen model : gemma-4-31b-it
+
+ile yapılan benchmark sonuçlarının detaylıca yorumlandığı süreç ve çıktı ödevidir.
