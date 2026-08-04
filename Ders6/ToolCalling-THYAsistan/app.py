@@ -11,6 +11,24 @@ from openai import OpenAI
 import db
 import tools
 
+# Bu uygulama gerçek GPU işi yapmıyor (sadece OpenRouter API + CPU üzerinde küçük
+# hesaplar), ama hesabın ücretsiz Hugging Face Spaces hakkı yalnızca ZeroGPU
+# donanımında geçerli. ZeroGPU çalışma zamanı, en az bir @spaces.GPU fonksiyonu
+# görmeden Space'i başlatmayı reddediyor; bu yüzden zararsız bir dummy fonksiyon
+# tanımlıyoruz. Yerelde `spaces` paketi kurulu değilse sessizce no-op'a düşer.
+try:
+    import spaces
+    _gpu_dekoratoru = spaces.GPU
+except ImportError:
+    def _gpu_dekoratoru(fn):
+        return fn
+
+
+@_gpu_dekoratoru
+def _zero_gpu_kontrolu():
+    """ZeroGPU çalışma zamanının aradığı işaret fonksiyon; gerçek iş yapmaz."""
+    return True
+
 
 def _env_yukle(yol=".env"):
     if not os.path.exists(yol):
